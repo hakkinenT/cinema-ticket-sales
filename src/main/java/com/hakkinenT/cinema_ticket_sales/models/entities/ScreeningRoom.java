@@ -8,25 +8,15 @@ import java.util.Objects;
 @Document(collection = "rooms")
 public class ScreeningRoom {
     @Id
-    private String id;
     private Integer roomNumber;
     private Integer capacity;
 
     public ScreeningRoom() {
     }
 
-    public ScreeningRoom(String id, Integer roomNumber, Integer capacity) {
-        this.id = id;
+    public ScreeningRoom(Integer roomNumber, Integer capacity) {
         this.roomNumber = roomNumber;
         this.capacity = capacity;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
 
     public Integer getRoomNumber() {
@@ -50,11 +40,11 @@ public class ScreeningRoom {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ScreeningRoom that = (ScreeningRoom) o;
-        return Objects.equals(id, that.id);
+        return Objects.equals(roomNumber, that.roomNumber);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(id);
+        return Objects.hashCode(roomNumber);
     }
 }
