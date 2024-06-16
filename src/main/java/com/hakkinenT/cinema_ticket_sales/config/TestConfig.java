@@ -49,10 +49,10 @@ public class TestConfig {
 
         seatRepository.saveAll(Arrays.asList(seat1, seat2, seat3));
 
-        Gender gender1 = new Gender(null, "FICÇÃO");
-        Gender gender2 = new Gender(null, "ROMANCE");
-        Gender gender3 = new Gender(null, "COMÉDIA");
-        Gender gender4 = new Gender(null, "COMÉDIA ROMANTICA");
+        Gender gender1 = new Gender("fiction", "FICÇÃO");
+        Gender gender2 = new Gender("romance", "ROMANCE");
+        Gender gender3 = new Gender("comedy", "COMÉDIA");
+        Gender gender4 = new Gender("romanticcomedy", "COMÉDIA ROMANTICA");
 
         genderRepository.saveAll(Arrays.asList(gender1, gender2, gender3, gender4));
 
@@ -67,7 +67,7 @@ public class TestConfig {
         Actor actor4 = new Actor("Amanda Seyfried", act4);
 
 
-        Movie movie = new Movie(null, "Meninas Malvadas", "01:37:00", gender3);
+        Movie movie = new Movie("meangirl", "Meninas Malvadas", "01:37:00", gender3);
         movie.getActors().addAll(Arrays.asList(actor1, actor2, actor3, actor4));
 
         movie = movieRepository.insert(movie);
