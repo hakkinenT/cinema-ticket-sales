@@ -14,10 +14,10 @@ public class Session {
     private Double halfTicketValue;
     private boolean closed;
 
-    @DBRef
+    @DBRef(lazy = true)
     private Movie movie;
 
-    @DBRef
+    @DBRef(lazy = true)
     private ScreeningRoom room;
 
     public Session() {
