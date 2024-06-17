@@ -2,6 +2,7 @@ package com.hakkinenT.cinema_ticket_sales.config;
 
 import com.hakkinenT.cinema_ticket_sales.models.embedded.Act;
 import com.hakkinenT.cinema_ticket_sales.models.embedded.Actor;
+import com.hakkinenT.cinema_ticket_sales.models.embedded.Seat;
 import com.hakkinenT.cinema_ticket_sales.models.entities.*;
 import com.hakkinenT.cinema_ticket_sales.repositories.*;
 import jakarta.annotation.PostConstruct;
@@ -15,8 +16,6 @@ import java.util.Arrays;
 @Configuration
 @Profile("test")
 public class TestConfig {
-    @Autowired
-    private SeatRepository seatRepository;
 
     @Autowired
     private ScreeningRoomRepository roomRepository;
@@ -32,22 +31,98 @@ public class TestConfig {
 
     @PostConstruct
     public void init(){
-        seatRepository.deleteAll();
         roomRepository.deleteAll();
         genderRepository.deleteAll();
         movieRepository.deleteAll();
         sessionRepository.deleteAll();
 
-        ScreeningRoom room1 = new ScreeningRoom(1, 100);
+
+
+        ScreeningRoom room1 = new ScreeningRoom(1, 3000);
+
+        Seat seat = null;
+        for (int i = 0; i < 3000; i++) {
+            if(i < 10){
+                seat = new Seat("00" + i);
+
+                room1.getSeats().add(seat);
+            }else if(i <= 99){
+                seat = new Seat("0" + i);
+                room1.getSeats().add(seat);
+            }else{
+                seat = new Seat(String.valueOf(i));
+                room1.getSeats().add(seat);
+            }
+
+        }
         ScreeningRoom room2 = new ScreeningRoom(2, 50);
 
-        roomRepository.saveAll(Arrays.asList(room1, room2));
+        for (int i = 0; i < 50; i++) {
 
-        Seat seat1 = new Seat(null, "001", room1);
-        Seat seat2 = new Seat(null, "002", room1);
-        Seat seat3 = new Seat(null, "001", room2);
+                if(i < 10){
+                    seat = new Seat("00" + i);
 
-        seatRepository.saveAll(Arrays.asList(seat1, seat2, seat3));
+                    room2.getSeats().add(seat);
+                }else{
+                    seat = new Seat("0" + i);
+
+                    room2.getSeats().add(seat);
+                }
+
+
+        }
+
+        ScreeningRoom room3 = new ScreeningRoom(3, 100);
+        for (int i = 0; i < 100; i++) {
+
+                if(i < 10){
+                    seat = new Seat("00" + i);
+
+                    room3.getSeats().add(seat);
+                }else{
+                    seat = new Seat("0" + i);
+
+                    room3.getSeats().add(seat);
+                }
+
+
+        }
+
+        ScreeningRoom room4 = new ScreeningRoom(4, 100);
+        for (int i = 0; i < 100; i++) {
+
+            if(i < 10){
+                seat = new Seat("00" + i);
+
+                room4.getSeats().add(seat);
+            }else{
+                seat = new Seat("0" + i);
+
+                room4.getSeats().add(seat);
+            }
+
+
+        }
+
+        ScreeningRoom room5 = new ScreeningRoom(4, 100);
+        for (int i = 0; i < 150; i++) {
+            if(i < 10){
+                seat = new Seat("00" + i);
+
+                room5.getSeats().add(seat);
+            }else if(i <= 99){
+                seat = new Seat("0" + i);
+                room5.getSeats().add(seat);
+            }else{
+                seat = new Seat(String.valueOf(i));
+                room5.getSeats().add(seat);
+            }
+
+        }
+
+        roomRepository.saveAll(Arrays.asList(room1, room2, room3, room4, room5));
+
+
 
         Gender gender1 = new Gender("fiction", "FICÇÃO");
         Gender gender2 = new Gender("romance", "ROMANCE");

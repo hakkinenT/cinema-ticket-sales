@@ -1,8 +1,11 @@
 package com.hakkinenT.cinema_ticket_sales.models.entities;
 
+import com.hakkinenT.cinema_ticket_sales.models.embedded.Seat;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Document(collection = "rooms")
@@ -10,6 +13,8 @@ public class ScreeningRoom {
     @Id
     private Integer roomNumber;
     private Integer capacity;
+
+    List<Seat> seats = new ArrayList<>();
 
     public ScreeningRoom() {
     }
@@ -33,6 +38,10 @@ public class ScreeningRoom {
 
     public void setCapacity(Integer capacity) {
         this.capacity = capacity;
+    }
+
+    public List<Seat> getSeats() {
+        return seats;
     }
 
     @Override
