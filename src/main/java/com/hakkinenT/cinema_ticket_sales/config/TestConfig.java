@@ -4,6 +4,7 @@ import com.hakkinenT.cinema_ticket_sales.models.embedded.Act;
 import com.hakkinenT.cinema_ticket_sales.models.embedded.Actor;
 import com.hakkinenT.cinema_ticket_sales.models.embedded.Seat;
 import com.hakkinenT.cinema_ticket_sales.models.entities.*;
+import com.hakkinenT.cinema_ticket_sales.models.entities.id.SessionId;
 import com.hakkinenT.cinema_ticket_sales.repositories.*;
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -151,9 +152,8 @@ public class TestConfig {
             room1 = roomRepository.findById(room1.getRoomNumber()).get();
         }
 
-        Session session = new Session(null, LocalDateTime.of(2024, 6, 13, 10, 0, 0), 60.0, 30.0, false, movie, room1);
+        SessionId sessionId = new SessionId(LocalDateTime.of(2024, 6, 13, 10, 0, 0), 1, "meangirl");
+        Session session = new Session(sessionId, 60.0, 30.0, false);
         sessionRepository.insert(session);
-
-
     }
 }

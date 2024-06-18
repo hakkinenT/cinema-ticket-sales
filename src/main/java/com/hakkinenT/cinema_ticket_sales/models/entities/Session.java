@@ -1,60 +1,39 @@
 package com.hakkinenT.cinema_ticket_sales.models.entities;
 
-import org.springframework.data.mongodb.core.mapping.DBRef;
+import com.hakkinenT.cinema_ticket_sales.models.entities.id.SessionId;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.util.Objects;
-
+@Document(collection = "sessions")
 public class Session {
-    private String id;
-    private LocalDateTime date;
+    @Id
+    private SessionId id;
     private Double fullTicketValue;
     private Double halfTicketValue;
     private boolean closed;
 
-    @DBRef(lazy = true)
-    private Movie movie;
-
-    @DBRef(lazy = true)
-    private ScreeningRoom room;
-
     public Session() {
     }
 
-    public Session(String id, LocalDateTime date, Double fullTicketValue, Double halfTicketValue, boolean closed) {
+    public Session(SessionId id, Double fullTicketValue, Double halfTicketValue) {
         this.id = id;
-        this.date = date;
+        this.fullTicketValue = fullTicketValue;
+        this.halfTicketValue = halfTicketValue;
+    }
+
+    public Session(SessionId id, Double fullTicketValue, Double halfTicketValue, boolean closed) {
+        this.id = id;
         this.fullTicketValue = fullTicketValue;
         this.halfTicketValue = halfTicketValue;
         this.closed = closed;
     }
 
-    public Session(String id, LocalDateTime date, Double fullTicketValue, Double halfTicketValue, boolean closed, Movie movie, ScreeningRoom room) {
-        this.id = id;
-        this.date = date;
-        this.fullTicketValue = fullTicketValue;
-        this.halfTicketValue = halfTicketValue;
-        this.closed = closed;
-        this.movie = movie;
-        this.room = room;
-    }
-
-    public String getId() {
+    public SessionId getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(SessionId id) {
         this.id = id;
-    }
-
-    public LocalDateTime getDate() {
-        return date;
-    }
-
-    public void setDate(LocalDateTime date) {
-        this.date = date;
     }
 
     public Double getFullTicketValue() {
@@ -81,32 +60,4 @@ public class Session {
         this.closed = closed;
     }
 
-    public Movie getMovie() {
-        return movie;
-    }
-
-    public void setMovie(Movie movie) {
-        this.movie = movie;
-    }
-
-    public ScreeningRoom getRoom() {
-        return room;
-    }
-
-    public void setRoom(ScreeningRoom room) {
-        this.room = room;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Session session = (Session) o;
-        return Objects.equals(id, session.id);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hashCode(id);
-    }
 }
